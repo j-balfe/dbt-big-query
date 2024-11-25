@@ -1,0 +1,10 @@
+{
+    "sqlfluff.excludeRules": [
+        ""
+    ],
+    "cSpell.words": [
+        "datawarehouse",
+        "datepart",
+        "monzo"
+    ]
+}

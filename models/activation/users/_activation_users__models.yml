@@ -1,0 +1,12 @@
+version: 2
+
+models:
+  - name: accounts_daily
+    description: |
+      Daily view of our accounts. Enriched with information about the user and booleans to highlight open and active accounts.
+      Use this model to explore active users within the last 7 days.
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - date_day
+            - account_id

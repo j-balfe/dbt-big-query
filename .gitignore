@@ -1,0 +1,22 @@
+# Ignore Python virtual environment folders
+venv/
+env/
+
+# Ignore Python bytecode files
+*.pyc
+__pycache__/
+
+# Ignore dbt log files
+logs/
+dbt_packages/
+
+# Ignore dbt target folder (optional; recommended in dev environments)
+target/
+
+# Ignore environment.yml and .env files
+environment.yml
+.env
+
+# Ignore sensitive credential files
+secrets/
+credentials.json

@@ -1,0 +1,28 @@
+version: 2
+
+models:
+  - name: dim_accounts
+    description: |
+      One record per account. Includes information about the when the account was first created, closed, reopened and the date of the last transaction.
+    columns:
+      - name: account_id
+        data_tests:
+          - unique
+          - not_null
+
+  - name: dim_users
+    description: |
+      One record per user. Includes information about number of active accounts.
+    columns:
+      - name: user_id
+        data_tests:
+          - unique
+          - not_null
+
+  - name: fct_accounts_snapshot_day
+    description: One record per account per day from the date of account creation to the current_date.
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - date_day
+            - account_id

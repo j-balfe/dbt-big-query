@@ -1,0 +1,19 @@
+name: 'monzo_project'
+version: '1.0.0'
+config-version: 2
+
+profile: 'monzo_profile'
+
+clean-targets:
+  - target
+  - logs
+
+models:
+  monzo_project:
+    activation:
+      +materialized: table
+    marts:
+      +materialized: table
+    staging:
+      monzo_datawarehouse:
+        +materialized: view

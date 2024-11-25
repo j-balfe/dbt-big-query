@@ -1,0 +1,73 @@
+version: 2
+
+models:
+  - name: stg_monzo_datawarehouse__account_created
+    description: One record per account created. Includes information about the type of account created.
+    columns:
+      - name: account_id
+        data_tests:
+          - unique
+          - not_null
+      - name: account_type
+        data_tests:
+          - accepted_values:
+              values: [null, 'uk_retail', 'uk_retail_pot', 'uk_retail_joint']
+
+  - name: stg_monzo_datawarehouse__account_closed
+    description: |
+      One record per account closure. One account can have many closures.
+      However, there should only be one closure per unique account_id & closed_at combination.
+      
+      N.B. This model is qualified to remove duplicate records for accounts with closures with matching timestamps.
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - account_id
+            - closed_at
+    columns:
+      - name: account_id
+        data_tests:
+          - not_null
+      - name: closed_at
+        data_tests:
+          - not_null
+
+  - name: stg_monzo_datawarehouse__account_reopened
+    description: |
+      One record per account account reopened. One account can have many reopens.
+      However, there should only be one closure per unique account_id & closed_at combination.
+      
+      N.B. This model is qualified to remove duplicate records for accounts with closures with matching timestamps.
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - account_id
+            - reopened_at
+    columns:
+      - name: account_id
+        data_tests:
+          - not_null
+      - name: reopened_at
+        data_tests:
+          - not_null
+
+  - name: stg_monzo_datawarehouse__account_transactions
+    description: |
+      One record per date with valid transactions.
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - account_id
+            - transaction_date
+    columns:
+      - name: account_transaction_id
+        data_tests:
+          - unique
+          - not_null
+      - name: account_id
+        data_tests:
+          - not_null
+      - name: transaction_date
+        data_tests:
+          - not_null
+    
