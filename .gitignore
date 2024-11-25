@@ -20,7 +20,7 @@ environment.yml
 # Ignore vscode specific files
 .vscode/
 .user.yml
-packages-lock.json
+packages-lock.yml
 
 # Ignore sensitive credential files
 secrets/
