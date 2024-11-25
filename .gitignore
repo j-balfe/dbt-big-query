@@ -16,7 +16,11 @@ target/
 # Ignore environment.yml and .env files
 environment.yml
 .env
-.vscode
+
+# Ignore vscode specific files
+.vscode/
+.user.yml
+package-lock.json
 
 # Ignore sensitive credential files
 secrets/
