@@ -25,10 +25,9 @@ fct_accounts_snapshot_day as (
     select
         fct_accounts_snapshot_day.date_day
         , dim_accounts.account_type
-        , dim_users.total_accounts_opened as total_accounts_opened_for_this_user_all_time
-        , dim_users.total_open_accounts as total_open_accounts_for_this_user_all_time
         , fct_accounts_snapshot_day.account_id
         , fct_accounts_snapshot_day.user_id
+        , dim_users.first_account_created_at
         , fct_accounts_snapshot_day.account_created_at
         , fct_accounts_snapshot_day.account_last_closed_at
         , fct_accounts_snapshot_day.account_last_reopened_at

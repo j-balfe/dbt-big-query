@@ -25,7 +25,7 @@ stg_monzo_datawarehouse__account_created as (
 , base as (
     select
         user_id
-        , min(created_at) as first_account_opened_at
+        , min(created_at) as first_account_created_at
     from stg_monzo_datawarehouse__account_created
     group by 1
 )
@@ -43,7 +43,7 @@ stg_monzo_datawarehouse__account_created as (
 , final as (
     select
         base.user_id
-        , base.first_account_opened_at
+        , base.first_account_created_at
         , accounts_aggregated.total_accounts_opened
         , accounts_aggregated.total_open_accounts
         , accounts_aggregated.total_active_accounts_last_7_days
