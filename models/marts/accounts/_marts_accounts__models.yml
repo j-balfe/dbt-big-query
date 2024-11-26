@@ -6,9 +6,35 @@ models:
       One record per account. Includes information about the when the account was first created, closed, reopened and the date of the last transaction.
     columns:
       - name: account_id
+        description: Unique ID for each account
         data_tests:
           - unique
           - not_null
+      - name: user_id
+        description: Unique ID of the user associated with each account.
+      - name: account_type
+        description: |
+          The type of account. Includes the following:
+            - unassigned (no account type recorded)
+            - uk_retail
+            - uk_retail_pot
+            - uk_retail_joint
+      - name: account_created_at
+        description: Timestamp (formatted as UTC) showing when the account was created.
+      - name: account_last_closed_at
+        description: Timestamp (formatted as UTC) showing when the account was last closed. Returns null if the account has not been closed.
+      - name: account_last_reopened_at
+        description: Timestamp (formatted as UTC) showing when the account was last reopened. Returns null if the account has not been reopened.
+      - name: account_last_transaction_date
+        description: Date of the last transaction for this account. Returns null if there have been no transactions.
+      - name: total_account_transactions
+        description: The total transactions to date for this account.
+      - name: is_account_open
+        description: |
+          This field indicates whether an account is currently open. It evaluates the following conditions:
+            •	Returns true if the account has never been closed (account_last_closed_at is null).
+            •	Returns true if the account was reopened after it was last closed (account_last_reopened_at > account_last_closed_at).
+            •	Otherwise, returns false, meaning the account is currently closed.
 
   - name: dim_users
     description: |
