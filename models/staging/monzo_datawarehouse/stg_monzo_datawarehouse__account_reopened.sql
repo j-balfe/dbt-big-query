@@ -14,9 +14,10 @@ source as (
 
 , final as (
     select
-        -- ids
+        -- using safe_cast in case the data types upstream change.
+        -- ids: cast as strings for consistency
         safe_cast(account_id_hashed as string) as account_id
-        --timestamps
+        --timestamps: source timestamp is formatted as UTC, standard for all timestamps is UTC so I haven't added a _utc suffix.
         , safe_cast(reopened_ts as timestamp) as reopened_at
     from source
 )

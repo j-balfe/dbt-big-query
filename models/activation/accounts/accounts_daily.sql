@@ -6,6 +6,10 @@
 
 with
 
+-- Here is the final model in my DAG.
+-- The purpose of this model is to allow denormalisation of the base fct model to make self-serve easier for stakeholders.
+-- The logic used in this model is intentionally simple as all the complex aggregating have been applied upstream.
+
 fct_accounts_snapshot_day as (
     select *
     from {{ ref('fct_accounts_snapshot_day') }}
@@ -27,7 +31,7 @@ fct_accounts_snapshot_day as (
         , dim_accounts.account_type
         , fct_accounts_snapshot_day.account_id
         , fct_accounts_snapshot_day.user_id
-        , dim_users.first_account_created_at
+        , dim_users.first_account_created_at as user_first_account_created_at
         , fct_accounts_snapshot_day.account_created_at
         , fct_accounts_snapshot_day.account_last_closed_at
         , fct_accounts_snapshot_day.account_last_reopened_at

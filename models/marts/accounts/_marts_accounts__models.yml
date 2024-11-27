@@ -41,9 +41,22 @@ models:
       One record per user. Includes information about number of active accounts.
     columns:
       - name: user_id
+        description: Unique ID for each user.
         data_tests:
           - unique
           - not_null
+      - name: first_account_created_at
+        description: The timestamp (formatted as UTC) when each user created their first account.
+      - name: total_accounts_opened
+        description: The total number of accounts created on the platform, regardless of their current status.
+      - name: total_open_accounts
+        description: |
+          The total accounts that are currently open. For an account to be deemed open it must fit into the following categories:
+            •	Returns true if the account has never been closed (account_last_closed_at is null).
+            •	Returns true if the account was reopened after it was last closed (account_last_reopened_at > account_last_closed_at).
+            •	Otherwise, returns false, meaning the account is currently closed.
+      - name: total_active_accounts_last_7_days
+        description: The total accounts with transactions within the last 7 days.
 
   - name: fct_accounts_snapshot_day
     description: One record per account per day from the date of account creation to the current_date.
