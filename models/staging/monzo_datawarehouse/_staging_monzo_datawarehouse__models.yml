@@ -11,7 +11,7 @@ models:
       - name: account_type
         data_tests:
           - accepted_values:
-              values: [null, 'uk_retail', 'uk_retail_pot', 'uk_retail_joint']
+              values: ['unassigned', 'uk_retail', 'uk_retail_pot', 'uk_retail_joint']
 
   - name: stg_monzo_datawarehouse__account_closed
     description: |

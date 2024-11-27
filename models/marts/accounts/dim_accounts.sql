@@ -41,7 +41,7 @@ stg_monzo_datawarehouse__account_created as (
         , max(stg_monzo_datawarehouse__account_closed.closed_at) as account_last_closed_at
         , max(stg_monzo_datawarehouse__account_reopened.reopened_at) as account_last_reopened_at
         , max(stg_monzo_datawarehouse__account_transactions.transaction_date) as account_last_transaction_date
-        , sum(stg_monzo_datawarehouse__account_transactions.transaction_date) as total_account_transactions
+        , sum(stg_monzo_datawarehouse__account_transactions.number_of_transactions) as total_account_transactions
     from stg_monzo_datawarehouse__account_created
     left join stg_monzo_datawarehouse__account_closed
         on stg_monzo_datawarehouse__account_created.account_id = stg_monzo_datawarehouse__account_closed.account_id
