@@ -9,7 +9,7 @@ with
 -- I've assumed that the date of the first account opening is immutable and therefore won't change.
 -- If I were to build this in production I would define a variable which returns the date of the first account ever opened with Monzo.
 -- For the purposes of the assessment I've picked a date before Monzo existed.
--- THis doesn't cause issues downstream as I fan out accounts between their creation date and the current date.
+-- This doesn't cause issues downstream as I fan out accounts between their creation date and the current date.
 date_spine as (
     {{ dbt_utils.date_spine(
         datepart="day",
@@ -47,8 +47,8 @@ date_spine as (
         date_spine.date_day
         , stg_monzo_datawarehouse__account_created.account_id
         , stg_monzo_datawarehouse__account_created.created_at
-    from date_spine
-    left join stg_monzo_datawarehouse__account_created
+    from stg_monzo_datawarehouse__account_created
+    left join date_spine
         on date_spine.date_day between safe_cast(stg_monzo_datawarehouse__account_created.created_at as date) and current_date
 )
 
